@@ -39,19 +39,67 @@
 			  margin-left: 50px;
 		  }
 		  .scrollable-content {
-		      height: 300px; /* 设置你想要的高度 */
-		      overflow-y: auto; /* 添加垂直滚动条 */
-		      padding: 10px; /* 可选，为内容添加内边距 */
+		      height: 300px; 
+		      overflow-y: auto;
+		      padding: 10px;
 		  }
+		  .modal {
+		      display: none; 
+		      position: fixed;
+		      z-index: 1;
+		      left: 0;
+		      top: 0;
+		      width: 100%;
+		      height: 100%;
+		      overflow: auto;
+		      background-color: rgb(0,0,0);
+		      background-color: rgba(0,0,0,0.4); 
 		      
+		  }
+		  
+		  .modal-content {
+		      background-color: #fefefe;
+		      
+		      margin: 0 auto;
+		      padding: 20px;
+		      border: 1px solid #888;
+		      width: 80%; 
+		      max-width: 600px;
+		      position: absolute;
+		      top: 50%;
+		      left: 50%;
+		      transform: translate(-50%, -50%);
+		  }
+		  
+		  .close {
+		      color: #aaa;
+		      float: right;
+		      font-size: 28px;
+		      font-weight: bold;
+		  }
+		  
+		  .close:hover,
+		  .close:focus {
+		      color: black;
+		      text-decoration: none;
+		      cursor: pointer;
+		  }
+	    .img1 img {
+	            transition: transform 0.3s ease, opacity 0.3s ease;
+	        }
+	        .img1 img:hover {
+	            transform: scale(1.02);
+	            opacity: 0.9; 
+	        }
+				
 	</style> 
 </head>  
 <body>  
     <div class="img1">
-       <img src="img/weinisi.jpg" alt="" > 
-	</div>
+       <img src="img/weinisi.jpg" alt="Weinisi Image" id="weinisiImg"> 
+    </div>
     <div class="content">
-            <div class="scrollable-content">
+        <div class="scrollable-content">
 			
 			陆上丝绸之路的终点：丝绸之路沿着古代中国西北边境的塞外走廊向西延伸，经过中亚、西亚、南亚等地区，最终到达地中海沿岸和欧洲。君士坦丁堡作为丝绸之路的西端终点站之一，是中国商品进入欧洲市场的重要渠道。中国丝绸等商品通过这条路线运送到君士坦丁堡，再由此分发到欧洲各地。
 			海上丝绸之路的参与：从7世纪开始，阿拉伯帝国和波斯帝国在印度洋上建立起强大的航海力量，并开辟了从红海到中国南海的海上丝绸之路。君士坦丁堡作为地中海最重要的港口之一，也参与了这个网络，并通过阿拉伯和波斯等中间商来获取中国商品。
@@ -61,13 +109,59 @@
 		  </div>
 	</div>
 	<div class="img2">
-	   <video controls>
+	   <video controls id="myVideo">
 	   		   <source src="img/video.mp4" type="video/mp4">
 	   		   
 	   	   </video>
 	</div>
+	
 	<div class="class1">
-		<input type="button" value="完成" />
+		<input type="button" value="完成" onclick="toggleContent();"/>
 	</div>
+	<div id="myModal" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal()">&times;</span>
+	            <p>视频即将开始播放，请点击确定。</p>
+	            <button onclick="playVideo()">确定</button>
+	        </div>
+	    </div>
+	
+	 
+	    <script>
+	    
+	        function toggleContent() {
+	            var content = document.getElementById("scrollableContent");
+	            if (content.style.display === "none" || content.style.display === "") {
+	                content.style.display = "block";
+	            } else {
+	                content.style.display = "none";
+	            }
+	        }
+	 
+	        
+	        function showModal() {
+	            var modal = document.getElementById("myModal");
+	            modal.style.display = "block";
+	        }
+			
+	 
+	        
+	        function closeModal() {
+	            var modal = document.getElementById("myModal");
+	            modal.style.display = "none";
+	        }
+	 
+	       
+	        function playVideo() {
+	            var video = document.getElementById("myVideo");
+	            video.play();
+	            closeModal(); 
+	        }
+
+	        window.onload = function() {
+	            showModal(); 
+	            var video = document.getElementById("myVideo");
+	        };
+	    </script>
 </body>  
 </html>
